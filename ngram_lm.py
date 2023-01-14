@@ -17,7 +17,24 @@ def start_pad(c):
 def ngrams(c, text):
     ''' Returns the ngrams of the text as tuples where the first element is
         the length-c context and the second is the character '''
-    pass
+    ngramArray = []
+    for count in range(0,len(text)):
+        context = c - count
+        string = ""
+        tempArray = []
+        if context > 0:
+            string += (start_pad(context))
+            for i in range (0,(c-context)):
+                string += text[i]
+        else:
+            for i in range(c,0,-1):
+                string += text[count-i]
+        tempArray.append(string)
+        tempArray.append(text[count])
+        ngramArray.append(tempArray)
+            
+    
+    return ngramArray
 
 def create_ngram_model(model_class, path, c=2, k=0):
     ''' Creates and returns a new n-gram model trained on the entire text
@@ -102,3 +119,7 @@ class NgramModelWithInterpolation(NgramModel):
 #
 # Hint: it may be useful to encapsulate it into multiple functions so
 # that you can easily run any test or experiment at any time.
+
+Array = ngrams(1,'abcdefg')
+print(Array)
+
