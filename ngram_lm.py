@@ -319,9 +319,22 @@ class NgramModelWithInterpolation(NgramModel):
 # Hint: it may be useful to encapsulate it into multiple functions so
 # that you can easily run any test or experiment at any time.
 
-m = create_ngram_model(NgramModel, 'shakespeare_input.txt', 3)
-print(m.perplexity("From fairest creatures we desire increase, That thereby beauty's rose might never die,"))
-print(m.perplexity("Mr. Golden exemplifies, perhaps in a cautionary way, how easy it has become to gamble on"))
+#m = create_ngram_model(NgramModel, 'shakespeare_input.txt', 3)
+#print(m.perplexity("From fairest creatures we desire increase, That thereby beauty's rose might never die,"))
+#print(m.perplexity("Mr. Golden exemplifies, perhaps in a cautionary way, how easy it has become to gamble on"))
+
+#m = create_ngram_model(NgramModel, 'shakespeare_input.txt', 15)
+#print('model_created')
+#print(m.random_text(2500))
+model_context = 2
+
+models = create_test_models(model_context)
+
+while True:
+    City = input("Please enter a city name: ")
+    CityNgrams = ngrams(model_context,City)
+    print(City + " is probably in " + test_single_city(models,CityNgrams,model_context))
+    pass
 
 
 """
@@ -335,9 +348,9 @@ print(m.perplexity("Mr. Golden exemplifies, perhaps in a cautionary way, how eas
 #print(m.random_text(25))
 #print([m.random_char('d') for i in range(25)])
 
-#m = create_ngram_model(NgramModel, 'shakespeare_input.txt', 7)
-#print('model_created')
-#print(m.random_text(250))
+m = create_ngram_model(NgramModel, 'shakespeare_input.txt', 7)
+print('model_created')
+print(m.random_text(2500))
 
 
 #print(m.prob('d','a'))
@@ -368,11 +381,11 @@ models = create_test_models(model_context)
 #test_models_with_validation2(models, "val/pk.txt",model_context)
 #test_models_with_validation2(models, "val/za.txt",model_context)
 
-#while True:
-    #City = input("Please enter a city name: ")
-    #CityNgrams = ngrams(model_context,City)
-    #print(City + " is probably in " + test_single_city(models,CityNgrams,model_context))
-    #pass
+while True:
+    City = input("Please enter a city name: ")
+    CityNgrams = ngrams(model_context,City)
+    print(City + " is probably in " + test_single_city(models,CityNgrams,model_context))
+    pass
 
 
 af_accuracy = find_accuracy('af',model_context,models,"val/af.txt")
